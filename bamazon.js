@@ -11,7 +11,7 @@ var connection = mysql.createConnection({
 })
 
 connection.connect(function(err) {
-	// if (err) throw err;
+	if (err) throw err;
 	console.log('Connected as id' + connection.threadId);
 	bamazonBuyer();
 })
@@ -54,7 +54,7 @@ var bamazonBuyer = function() {
 				connection.query('UPDATE products SET ? WHERE itemID = ?', [{ stock_quantity: newQuantity }, itemID]);
 				bamazonBuyer();
 			} else {
-				console.log('There are not enough in stock for you to purchase that many.');
+				console.log('There are not enough in stock for you to purchase that quantity.');
 				bamazonBuyer();
 			}
 		})
